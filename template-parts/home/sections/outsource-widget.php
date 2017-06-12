@@ -1,4 +1,4 @@
-<section class="section section_outsource" style="background: url('assets/images/bg-outsource.jpeg') no-repeat;">
+<section class="section section_outsource" style="background: url('<?php get_template_directory_uri(); ?>/assets/images/bg-outsource.jpeg') no-repeat;">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
