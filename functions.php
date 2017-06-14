@@ -45,6 +45,7 @@ function codeilo_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
 		'menu-1' => esc_html__( 'Primary', 'codeilo' ),
+		'menu-2' => esc_html__( 'Secondary', 'codeilo' ),
 	) );
 
 	/*
@@ -114,22 +115,17 @@ function codeilo_scripts() {
 	// 
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'codeilo-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
-
-	wp_enqueue_script( 'codeilo-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
-
 	wp_enqueue_script( 'codeilo-bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array( 'jquery' ), time(), true );
 	wp_enqueue_script( 'codeilo-owl', get_template_directory_uri() . '/assets/js/owl.carousel.min.js', array( 'jquery' ), time(), true );
 	wp_enqueue_script( 'codeilo-masonry', '//masonry.desandro.com/masonry.pkgd.js', array(), time(), true );
 	wp_enqueue_script( 'codeilo-imagesloaded', '//imagesloaded.desandro.com/imagesloaded.pkgd.js', array(), time(), true );
 	wp_enqueue_script( 'codeilo-theme', get_template_directory_uri() . '/js/scripts.js', array( 'jquery' ), time(), true );
-	wp_enqueue_script( 'codeilo-team11', get_template_directory_uri() . '/js/jquery-1.11.1.min.js', array( 'jquery' ), time(), true );
-	wp_enqueue_script( 'codeilo-team1', '//masonry.desandro.com/masonry.pkgd.js', array(), time(), true );
-	wp_enqueue_script( 'codeilo-team', get_template_directory_uri() . '/js/custom.js', array( 'jquery' ), time(), true );
+	wp_enqueue_script( 'codeilo-contact-jq-min', get_template_directory_uri() . '/assets/js/jquery-1.11.1.min.js', array());
+	wp_enqueue_script( 'codeilo-contact-custom', get_template_directory_uri() . 'assets/js/custom.js', array( 'jquery' ), time(), true );
+	wp_enqueue_script( 'codeilo-contact-map', get_template_directory_uri() . '/assets/js/map.js', array( 'jquery' ), time(), true );
+	wp_enqueue_script( 'codeilo-contact-map-key', '//maps.googleapis.com/maps/api/js?key=AIzaSyDRlJ1-uvSWHRlqHvQgXovaoNCugIRSWww&callback=initMap', array(), time(), true );
 
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
 }
 add_action( 'wp_enqueue_scripts', 'codeilo_scripts' );
 
@@ -172,51 +168,3 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
-// register a custom post type called 'banner'
-function codeilo_create_post_type_banner() {
-    $labels = array(
-        'name' => __( 'Banners' ),
-        'singular_name' => __( 'banner' ),
-        'add_new' => __( 'New banner' ),
-        'add_new_item' => __( 'Add New banner' ),
-        'edit_item' => __( 'Edit banner' ),
-        'new_item' => __( 'New banner' ),
-        'view_item' => __( 'View banner' ),
-        'search_items' => __( 'Search banners' ),
-        'not_found' =>  __( 'No banners Found' ),
-        'not_found_in_trash' => __( 'No banners found in Trash' ),
-    );
-    $args = array(
-        'labels' => $labels,
-        'has_archive' => true,
-        'public' => true,
-        'hierarchical' => false,
-        'supports' => array(
-            'title',
-            'editor',
-            'thumbnail',
-            'custom-fields',
-            'page-attributes'
-        ),
-        'taxonomies' => array( 'post_tag', 'category'),
-    );
-    register_post_type( 'banner', $args );
-}
-add_action( 'init', 'codeilo_create_post_type_banner' );
-
-function codeilo_create_post_type_team() {
-    register_post_type( 'team',
-	// CPT Options
-		array(
-			'labels' => array(
-				'name' => __( 'Team' ),
-				'singular_name' => __( 'Team' )
-			),
-			'public' => true,
-			'has_archive' => true,
-			'rewrite' => array('slug' => 'team'),
-		)
-	);
-}
-// Hooking up our function to theme setup
-add_action( 'init', 'codeilo_create_post_type_team' );

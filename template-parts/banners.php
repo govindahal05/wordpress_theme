@@ -5,9 +5,9 @@
                                 <h1> Our Team </h1>
                                 <ol class="breadcrumb">
                                     <li>
-                                        <a href="#">Home</a>
+                                        <a href="<?php echo get_home_url();?>">Home</a>
                                     </li>
-                                    <li class="active"> Team </li>
+                                    <li class="active"> <?php the_title(); ?> </li>
                                 </ol>
                             </div>
                         </div>

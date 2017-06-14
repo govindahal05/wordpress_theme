@@ -19,11 +19,17 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 
 <?php wp_head(); ?>
-</head>
+</head>	
 
 <body <?php body_class(); ?>>
 	<div id="wrapper">
-		<div class="hero_top_holder hero_top_home">
+	<?php
+		if (is_page( 'home' ) ){?>
+			<div class="hero_top_holder hero_top_home">
+		<?php }
+		else {?>
+			<div class="hero_top_holder">
+		<?php } ?>		
 		    <header id="header">
 		        <div class="container-fluid">
 		            <div class="row">
@@ -37,16 +43,11 @@
 		                            </div>
 		                            <div class="overlay" id="overlay">
 		                                <nav class="overlay-menu">
-		                                    <ul>
-		                                        <li class="active"><a href="index.html">Home</a></li>
-		                                        <li><a href="service.html">Services</a></li>
-		                                        <li><a href="outsource.html">Outsourcing</a></li>
-		                                        <li><a href="team.html">Team</a></li>
-		                                        <li><a href="#">Portfolio</a></li>
-		                                        <li><a href="blog.html">Blog</a></li>
-		                                        <li><a href="career.html">career</a></li>
-		                                        <li><a href="contact.html">Contact</a></li>
-		                                    </ul>
+		                                    <?php
+		                                    	wp_nav_menu( array(
+		                                    	    'menu' => 'menu-1'
+		                                    	) );
+		                                    ?>
 		                                </nav>
 		                            </div>
 		                        </div>

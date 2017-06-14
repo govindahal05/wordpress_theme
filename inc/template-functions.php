@@ -25,8 +25,3 @@ function codeilo_body_classes( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'codeilo_body_classes' );
-
-// 
-function codeilo_get_posts() {
-	// 
-}
